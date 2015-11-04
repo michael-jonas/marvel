@@ -7,7 +7,7 @@ var request = require('request');
 var cheerio = require('cheerio');
 var util = require('util');
 var data = '';
-var keys = require('config.js');
+var keys = require('./config.js');
 
 var api = require('marvel-api');
 
