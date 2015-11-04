@@ -20,6 +20,8 @@ marvel.characters.findAll(function(err, results){
 });
 
 app.get('/:character', function(req,res){
+	if(req.params.character === 'favicon.ico'){}
+		
 	marvel.characters.findByName(req.params.character, function(err, results){
 		if(err) throw err;
 
