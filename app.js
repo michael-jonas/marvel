@@ -12,8 +12,8 @@ var keys = require('./config.js');
 var api = require('marvel-api');
 
 var marvel = api.createClient({
-	publicKey: keys.pub,
-	privateKey: keys.priv
+	publicKey: process.env.pub,
+	privateKey: process.env.priv
 });
 
 marvel.characters.findAll(function(err, results){
