@@ -20,21 +20,25 @@ marvel.characters.findAll(function(err, results){
 });
 
 app.get('/:character', function(req,res){
-	console.log(req.params.character);
+	if(req.params.character === 'favicon.ico'){
+		res.send('Hit favicon');
+	}
 
-	marvel.characters.findByName(req.params.character, function(err, results){
-		if(err) throw err;
+	else{
+		marvel.characters.findByName(req.params.character, function(err, results){
+			if(err) throw err;
 
-		download(results.data[0].thumbnail.path + '.' + results.data[0].thumbnail.extension, 'marvel' + '.jpg', function(){
-			fs.readFile('marvel.jpg', function(err,data){
-				if(err) throw err;
-				res.writeHead(200, {'Content-Type': 'text/html'});
-	  			res.write('<html><body><img src="data:image/jpeg;base64,')
-	  			res.write(new Buffer(data).toString('base64'));
-	  			res.end('"/></body></html>');
+			download(results.data[0].thumbnail.path + '.' + results.data[0].thumbnail.extension, 'marvel' + '.jpg', function(){
+				fs.readFile('marvel.jpg', function(err,data){
+					if(err) throw err;
+					res.writeHead(200, {'Content-Type': 'text/html'});
+		  			res.write('<html><body><img src="data:image/jpeg;base64,')
+		  			res.write(new Buffer(data).toString('base64'));
+		  			res.end('"/></body></html>');
+				});
 			});
 		});
-	});
+	}
 });
 
 app.set('port', (process.env.PORT || 5000));
