@@ -36,7 +36,10 @@ app.get('/:character', function(req,res){
 	});
 });
 
-app.listen(3000);
+app.set('port', (process.env.PORT || 5000));
+app.listen(app.get('port'), function() {
+	console.log('Node app running on port', app.get('port'));
+});
 
 
 function download(uri, filename, callback){
