@@ -7,14 +7,13 @@ var request = require('request');
 var cheerio = require('cheerio');
 var util = require('util');
 var data = '';
-var pubKey = '18b80a4ceb57142835c9f9b54233eb1c';
-var privKey = '7bbdc7541dfac1eedfd43ddf3a6add2edf3d7f2a';
+var keys = require('config.js');
 
 var api = require('marvel-api');
 
 var marvel = api.createClient({
-	publicKey: pubKey,
-	privateKey: privKey
+	publicKey: keys.pub,
+	privateKey: keys.priv
 });
 
 marvel.characters.findAll(function(err, results){
