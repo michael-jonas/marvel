@@ -29,6 +29,10 @@ app.get('/:character', function(req,res){
 	else{
 		marvel.characters.findByName(req.params.character, function(err, results){
 			if(err) res.send('Character not found. Try again');
+			if(results.data[0] === 'undefined'){ 
+				console.log('undefined');
+				res.send('Character not found');
+			};
 
 			download(results.data[0].thumbnail.path + '.' + results.data[0].thumbnail.extension, 'marvel' + '.jpg', function(){
 				fs.readFile('marvel.jpg', function(err,data){
