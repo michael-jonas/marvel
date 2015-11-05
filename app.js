@@ -31,20 +31,24 @@ app.get('/:character', function(req,res){
 
 			//If it cant find the character it might crash
 			if(err) res.send('Character not found. Try again');
-			if(results.data[0] == undefined && results == undefined){ 
+			
+			else if(results.data[0] == undefined && results == undefined){ 
 				console.log('undefined');
 				res.send('Character not found');
 			};
 
-			download(results.data[0].thumbnail.path + '.' + results.data[0].thumbnail.extension, 'marvel' + '.jpg', function(){
-				fs.readFile('marvel.jpg', function(err,data){
-					if(err) throw err;
-					res.writeHead(200, {'Content-Type': 'text/html'});
-		  			res.write('<html><body><img src="data:image/jpeg;base64,')
-		  			res.write(new Buffer(data).toString('base64'));
-		  			res.end('"/></body></html>');
+			else if{
+
+				download(results.data[0].thumbnail.path + '.' + results.data[0].thumbnail.extension, 'marvel' + '.jpg', function(){
+					fs.readFile('marvel.jpg', function(err,data){
+						if(err) throw err;
+						res.writeHead(200, {'Content-Type': 'text/html'});
+			  			res.write('<html><body><img src="data:image/jpeg;base64,')
+			  			res.write(new Buffer(data).toString('base64'));
+			  			res.end('"/></body></html>');
+					});
 				});
-			});
+			}
 		});
 	}
 });
