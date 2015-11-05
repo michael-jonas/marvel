@@ -37,7 +37,7 @@ app.get('/:character', function(req,res){
 				res.send('Character not found');
 			};
 
-			else if{
+			else{
 
 				download(results.data[0].thumbnail.path + '.' + results.data[0].thumbnail.extension, 'marvel' + '.jpg', function(){
 					fs.readFile('marvel.jpg', function(err,data){
