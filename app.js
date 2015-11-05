@@ -20,13 +20,15 @@ marvel.characters.findAll(function(err, results){
 });
 
 app.get('/:character', function(req,res){
+
+	//To do fix this favicon get
 	if(req.params.character === 'favicon.ico'){
 		res.send('Hit favicon');
 	}
 
 	else{
 		marvel.characters.findByName(req.params.character, function(err, results){
-			if(err) throw err;
+			if(err) res.send('Character not found. Try again');
 
 			download(results.data[0].thumbnail.path + '.' + results.data[0].thumbnail.extension, 'marvel' + '.jpg', function(){
 				fs.readFile('marvel.jpg', function(err,data){
