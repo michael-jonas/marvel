@@ -35,7 +35,7 @@ app.get('/:character', function(req,res){
 			else if(results.data[0] == undefined && results == undefined){ 
 				console.log('undefined');
 				res.send('Character not found');
-			};
+			}
 
 			else{
 
