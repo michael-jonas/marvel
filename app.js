@@ -28,6 +28,8 @@ app.get('/:character', function(req,res){
 
 	else{
 		marvel.characters.findByName(req.params.character, function(err, results){
+
+			//If it cant find the character it might crash
 			if(err) res.send('Character not found. Try again');
 			if(results.data[0] === undefined && results === undefined){ 
 				console.log('undefined');
